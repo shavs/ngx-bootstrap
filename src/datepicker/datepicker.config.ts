@@ -19,4 +19,5 @@ export class DatepickerConfig {
   monthColLimit = 3;
   yearColLimit = 5;
   shortcutPropagation = false;
+  resetTimeOnSelection = false;
 }

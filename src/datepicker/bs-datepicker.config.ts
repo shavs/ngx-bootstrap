@@ -48,6 +48,11 @@ export class BsDatepickerConfig implements DatepickerRenderOptions {
    */
   minMode?: BsDatepickerViewMode;
 
+  /**
+   * Reset time on selection of field
+   */
+  resetTimeOnSelection?: boolean;
+
   /** CSS class which will be applied to datepicker container,
    * usually used to set color theme
    */

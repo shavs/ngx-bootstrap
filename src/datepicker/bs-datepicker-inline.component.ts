@@ -22,6 +22,22 @@ export class BsDatepickerInlineDirective implements OnInit, OnDestroy, OnChanges
     if (this._bsValue === value) {
       return;
     }
+
+    if (this._bsValue !== value) {
+      const date = new Date(value);
+
+      date.setMilliseconds(0);
+      date.setSeconds(0);
+      date.setMinutes(0);
+      date.setHours(0);
+
+      this._bsValue = date;
+      this.bsValueChange.emit(date);
+
+      return;
+    }
+
+    // Otherwise, return the value given:
     this._bsValue = value;
     this.bsValueChange.emit(value);
   }
@@ -34,6 +50,10 @@ export class BsDatepickerInlineDirective implements OnInit, OnDestroy, OnChanges
    * Indicates whether datepicker is enabled or not
    */
   @Input() isDisabled: boolean;
+  /**
+   * Indicates whether datepicker is enabled or not
+   */
+  @Input() resetTimeOnSelection: boolean;
   /**
    * Minimum date which is available for selection
    */
@@ -125,7 +145,8 @@ export class BsDatepickerInlineDirective implements OnInit, OnDestroy, OnChanges
       isDisabled: this.isDisabled,
       minDate: this.minDate || this.bsConfig && this.bsConfig.minDate,
       maxDate: this.maxDate || this.bsConfig && this.bsConfig.maxDate,
-      datesDisabled: this.datesDisabled || this.bsConfig && this.bsConfig.datesDisabled
+      datesDisabled: this.datesDisabled || this.bsConfig && this.bsConfig.datesDisabled,
+      resetTimeOnSelection: this.resetTimeOnSelection || this.bsConfig && this.bsConfig.resetTimeOnSelection
     });
   }
 
